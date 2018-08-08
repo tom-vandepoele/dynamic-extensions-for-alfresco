@@ -1,8 +1,11 @@
 sudo: false
 language: java
-script: gradle test
+
 jdk:
   - oraclejdk8
+  
+script: 
+  - ./gradlew build
 
 cache:
   directories:

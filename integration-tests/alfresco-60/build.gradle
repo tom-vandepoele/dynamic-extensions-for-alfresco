@@ -1,0 +1,8 @@
+ext {
+    alfresco_base_image = 'alfresco/alfresco-content-repository:6.0.0'
+}
+
+dockerCompose {
+    environment.put 'ALFRESCO_BASE_IMAGE', 'alfresco/alfresco-content-repository:6.0.0'
+    environment.put 'POSTGRES_IMAGE', 'postgres:10.1'
+}
