@@ -23,12 +23,14 @@ dependencies {
 // Tests should be executed in child projects, not in this project:
 test.enabled = false
 
-configure(subprojects.findAll { it.name.startsWith("alfresco-") }) {
+task copyAmps(type: Copy) {
+    dependsOn project(":alfresco-dynamic-extensions-repo").tasks.amp
 
-    task copyAmps(type: Copy) {
-        from project(":alfresco-dynamic-extensions-repo").amp
-        into "${project.buildDir}/amps"
-    }
+    from project(":alfresco-dynamic-extensions-repo").amp
+    into "${buildDir}/amps"
+}
+
+configure(subprojects.findAll { it.name.startsWith("alfresco-") }) {
 
     task integrationTest(type: Test) {
         testClassesDirs = project(':integration-tests').sourceSets.test.output.classesDirs
@@ -61,5 +63,5 @@ configure(subprojects.findAll { it.name.startsWith("alfresco-") }) {
         isRequiredBy(project.tasks.integrationTest)
     }
 
-    composeUp.dependsOn copyAmps
+    composeUp.dependsOn project(':integration-tests').tasks.copyAmps
 }
