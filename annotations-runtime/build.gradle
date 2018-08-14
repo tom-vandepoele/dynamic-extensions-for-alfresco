@@ -5,7 +5,8 @@ dependencies {
     compile project(':webscripts')
     compile "org.apache.felix:org.apache.felix.framework:${project.ext.felixVersion}"
     compile "org.slf4j:slf4j-api:${project.ext.slf4jVersion}"
-    compile("org.springframework.extensions.surf:spring-webscripts:${project.ext.alfrescoVersion}")// {transitive = false}
+//    compile("org.springframework.extensions.surf:spring-webscripts:${project.ext.alfrescoVersion}")// {transitive = false}
+    compile("org.alfresco.surf:spring-webscripts:${project.ext.springWebScriptsVersion}")
     compile "org.freemarker:freemarker:2.3.16"
     compile "javax.servlet:servlet-api:${project.ext.servletVersion}"
     compile "org.springframework:spring-aop:${project.ext.springVersion}"
@@ -29,5 +30,8 @@ dependencies {
     testRuntime 'cglib:cglib-nodep:2.2'
     testRuntime 'xerces:xercesImpl:2.8.0'
 
-    testCompile("org.alfresco:alfresco-repository:${project.ext.alfrescoVersion}")
+    testCompile("org.alfresco:alfresco-repository:${project.ext.alfrescoRepoVersion}")
+    testCompile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    
+    testCompile 'javax.xml.bind:jaxb-api:2.4.0-b180725.0427'
 }

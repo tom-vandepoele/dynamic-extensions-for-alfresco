@@ -22,7 +22,7 @@ public class DynamicExtensionsSmokeTest {
 
         final String baseURI = "http://" + System.getProperty("alfresco.host", "localhost");
         RestAssured.baseURI = baseURI;
-        int port = Integer.parseInt(System.getProperty("alfresco.tcp.8080", "8082"));
+        int port = Integer.parseInt(System.getProperty("alfresco.tcp.8080", "8080"));
         RestAssured.port = port;
         final String basePath = "/alfresco";
         RestAssured.basePath = basePath;

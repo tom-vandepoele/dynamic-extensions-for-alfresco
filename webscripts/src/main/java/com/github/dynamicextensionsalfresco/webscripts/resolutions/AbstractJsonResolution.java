@@ -2,10 +2,8 @@ package com.github.dynamicextensionsalfresco.webscripts.resolutions;
 
 import com.github.dynamicextensionsalfresco.webscripts.AnnotationWebScriptRequest;
 import com.github.dynamicextensionsalfresco.webscripts.AnnotationWebscriptResponse;
-import org.alfresco.repo.content.MimetypeMap;
-
 import javax.annotation.Nonnull;
-import javax.servlet.http.HttpServletResponse;
+import org.alfresco.repo.content.MimetypeMap;
 
 /**
  * @author Laurent Van der Linden

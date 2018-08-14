@@ -40,6 +40,11 @@ public class AnnotationWebScriptOutputMessage implements ServerHttpResponse {
     }
 
     @Override
+    public void flush() {
+        
+    }
+
+    @Override
     public void close() {
     }
 

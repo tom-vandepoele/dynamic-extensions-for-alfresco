@@ -4,6 +4,22 @@ import com.github.dynamicextensionsalfresco.webscripts.AnnotationWebScriptReques
 import com.github.dynamicextensionsalfresco.webscripts.AnnotationWebscriptResponse;
 import com.github.dynamicextensionsalfresco.webscripts.resolutions.Resolution;
 import com.github.dynamicextensionsalfresco.webscripts.resolutions.TemplateResolution;
+import java.io.IOException;
+import java.io.Writer;
+import java.net.URL;
+import java.net.URLConnection;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.annotation.PostConstruct;
+import org.apache.http.HttpStatus;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +28,6 @@ import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.util.Assert;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.util.HtmlUtils;
-
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.Writer;
-import java.net.URL;
-import java.net.URLConnection;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Abstract base class for annotation-based Web Scripts that send static resources, such as Resources, CSS and images,
@@ -126,7 +131,7 @@ public abstract class AbstractBundleResourceHandler {
     }
 
 	protected void handleResourceNotFound(final String path, final WebScriptResponse response) throws IOException {
-		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		response.setStatus(HttpStatus.SC_NOT_FOUND);
 		response.setContentType("text/html");
 		final Writer out = response.getWriter();
 		out.write(String.format("<!doctype html><head><title>Not found</title></head><body>Could not find resource at path '%s'.</body></html>", HtmlUtils.htmlEscape(path)));

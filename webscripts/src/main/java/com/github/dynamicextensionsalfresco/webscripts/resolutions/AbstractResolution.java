@@ -2,16 +2,15 @@ package com.github.dynamicextensionsalfresco.webscripts.resolutions;
 
 import com.github.dynamicextensionsalfresco.webscripts.AnnotationWebScriptRequest;
 import com.github.dynamicextensionsalfresco.webscripts.AnnotationWebscriptResponse;
-import org.springframework.extensions.webscripts.Description;
-import org.springframework.extensions.webscripts.WebScriptResponse;
-import org.springframework.util.StringUtils;
-
-import javax.annotation.Nonnull;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Nonnull;
+import org.apache.http.HttpStatus;
+import org.springframework.extensions.webscripts.Description;
+import org.springframework.extensions.webscripts.WebScriptResponse;
+import org.springframework.util.StringUtils;
 
 /**
  * Template for other Resolution implementations
@@ -25,7 +24,7 @@ public abstract class AbstractResolution implements Resolution {
 
     private String encoding;
     private String contentType;
-    private int statusCode = HttpServletResponse.SC_OK;
+    private int statusCode = HttpStatus.SC_OK;
 
     public void resolve(@Nonnull AnnotationWebScriptRequest request,
                         @Nonnull AnnotationWebscriptResponse response,
@@ -42,7 +41,7 @@ public abstract class AbstractResolution implements Resolution {
             response.setContentEncoding(this.encoding);
         }
 
-        if (this.statusCode != HttpServletResponse.SC_OK) {
+        if (this.statusCode != HttpStatus.SC_OK) {
             response.setStatus(this.statusCode);
         }
 

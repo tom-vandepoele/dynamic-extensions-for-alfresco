@@ -281,7 +281,7 @@ public class ResponseBodyReturnValueTest extends AbstractWebScriptAnnotationsTes
 
     @Test
     public void testContentTypeResponse(){
-        String expectedContentType = MediaType.APPLICATION_JSON_VALUE;
+        String expectedContentType = MediaType.APPLICATION_JSON_UTF8_VALUE;
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
@@ -305,7 +305,7 @@ public class ResponseBodyReturnValueTest extends AbstractWebScriptAnnotationsTes
 
     @Test
     public void testContentTypeResponseDefault() {
-        String expectedContentType = MediaType.APPLICATION_JSON_VALUE;
+        String expectedContentType = MediaType.APPLICATION_JSON_UTF8_VALUE;
         String acceptContentType = "application/*";
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

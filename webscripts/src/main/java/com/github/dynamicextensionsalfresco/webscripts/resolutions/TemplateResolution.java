@@ -3,15 +3,18 @@ package com.github.dynamicextensionsalfresco.webscripts.resolutions;
 import com.github.dynamicextensionsalfresco.webscripts.AnnotationWebScriptRequest;
 import com.github.dynamicextensionsalfresco.webscripts.AnnotationWebscriptResponse;
 import com.github.dynamicextensionsalfresco.webscripts.UrlModel;
-import org.springframework.extensions.webscripts.*;
-import org.springframework.extensions.webscripts.json.JSONUtils;
-import org.springframework.util.ClassUtils;
-import org.springframework.util.StringUtils;
-
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.http.HttpStatus;
+import org.springframework.extensions.webscripts.Format;
+import org.springframework.extensions.webscripts.TemplateProcessor;
+import org.springframework.extensions.webscripts.TemplateProcessorRegistry;
+import org.springframework.extensions.webscripts.WebScriptRequest;
+import org.springframework.extensions.webscripts.WebScriptResponse;
+import org.springframework.extensions.webscripts.json.JSONUtils;
+import org.springframework.util.ClassUtils;
+import org.springframework.util.StringUtils;
 
 /**
  * Can be used directly by controllers or implicitly by returning a Map.
@@ -50,7 +53,7 @@ public class TemplateResolution extends AbstractResolution {
         final ResolutionParameters params = getParams();
 
         if (StringUtils.hasText(request.getFormat()) == false) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.setStatus(HttpStatus.SC_BAD_REQUEST);
             response.getWriter().write("No format specified.");
             return;
         }
@@ -115,7 +118,7 @@ public class TemplateResolution extends AbstractResolution {
                 addCacheControlHeaders(response, params);
             templateProcessor.process(templateName, model, response.getWriter());
         } else {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.setStatus(HttpStatus.SC_NOT_FOUND);
             response.getWriter().write(String.format("Could not find template: %s", templateName));
         }
     }
