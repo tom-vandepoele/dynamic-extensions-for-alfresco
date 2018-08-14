@@ -6,10 +6,11 @@ configurations {
 }
 
 dependencies {
-  compile("org.eclipse.gemini:org.eclipse.gemini.blueprint.extender:${project.ext.geminiVersion}") {
+  compile("org.eclipse.gemini.blueprint:gemini-blueprint-extender:${project.ext.geminiVersion}") {
     exclude group: "org.springframework"
   }
-  extender("org.eclipse.gemini:org.eclipse.gemini.blueprint.extender:${project.ext.geminiVersion}") {
+  compile ("org.osgi:org.osgi.core:${project.ext.osgiVersion}")
+  extender("org.eclipse.gemini.blueprint:gemini-blueprint-extender:${project.ext.geminiVersion}") {
     transitive = false
   }
 }
