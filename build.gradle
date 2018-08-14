@@ -143,7 +143,7 @@ subprojects {
         felixVersion = '4.2.1'
         springOsgiUtilVersion = '2.0.5.RELEASE'
         mockitoVersion = '1.10.19'
-        jibxVersion = '1.2.3'
+        jibxVersion = '1.2.6'
         hibernateVersion = '3.2.6.ga'
         servletVersion = '2.5'
         bndVersion = '2.4.1'

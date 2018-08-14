@@ -9,7 +9,9 @@ dependencies {
   compile("org.eclipse.gemini.blueprint:gemini-blueprint-extender:${project.ext.geminiVersion}") {
     exclude group: "org.springframework"
   }
-  compile ("org.osgi:org.osgi.core:${project.ext.osgiVersion}")
+  compile ("org.osgi:org.osgi.core:${project.ext.osgiVersion}") {
+    exclude group: "*"
+  }
   extender("org.eclipse.gemini.blueprint:gemini-blueprint-extender:${project.ext.geminiVersion}") {
     transitive = false
   }
