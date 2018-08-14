@@ -55,10 +55,10 @@ configure(subprojects.findAll { it.name.startsWith("alfresco-") }) {
         buildAdditionalArgs = ['--no-cache']
         
         // Uncomment for quick iterations when developing performance tests
-        stopContainers = false
+//        stopContainers = false
 
         // expose alfresco/inflow on a random port, comment to use default ports (8080 & 8081)
-//        environment.put 'COMPOSE_ALFRESCO_TCP_8080', '8080'
+        environment.put 'COMPOSE_ALFRESCO_TCP_8080', '8080'
 
         isRequiredBy(project.tasks.integrationTest)
     }
