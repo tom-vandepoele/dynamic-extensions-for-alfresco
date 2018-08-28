@@ -1,0 +1,5 @@
+dockerCompose {
+    environment.put 'COMPOSE_DOCKERFILE', 'alfresco-52/Dockerfile'
+    environment.put 'ALFRESCO_BASE_IMAGE', 'hub.xenit.eu/alfresco-community:5.1.g'
+    environment.put 'POSTGRES_IMAGE', 'postgres:10.1'
+}

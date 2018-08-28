@@ -3,7 +3,7 @@ version: "2.2"
 services:
   alfresco:
     build:
-      dockerfile: src/test/docker/Dockerfile
+      dockerfile: ${COMPOSE_DOCKERFILE:-src/test/docker/Dockerfile}
       context: ../../..
       args:
         - ALFRESCO_BASE_IMAGE=${ALFRESCO_BASE_IMAGE}
@@ -17,18 +17,23 @@ services:
                 -Djodconverter.enabled=false
                 -Ddeployment.method=DOCKER_COMPOSE
                 -Dcsrf.filter.enabled=false
+                -Dorg.slf4j.simpleLogger.defaultLogLevel=debug
                 -Xms1g -Xmx1g
                 "
+      CATALINA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000"
     ports:
     - ${COMPOSE_ALFRESCO_TCP_8080:-8080:8080} # by default expose on :8080
+    - 8000:8000
+    volumes:
+    - ../resources/simplelogger.properties:/usr/local/tomcat/shared/classes/simplelogger.properties
     depends_on:
       postgres:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/alfresco"]
+      test: CMD curl --fail --location http://localhost:8080/alfresco
       interval: 1s
       timeout: 3s
-      retries: 60
+      retries: 600
 
   postgres:
     image: ${POSTGRES_IMAGE}
@@ -37,7 +42,7 @@ services:
     - POSTGRES_USER=alfresco
     - POSTGRES_DB=alfresco
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: pg_isready -U postgres
       interval: 10s
       timeout: 5s
       retries: 5
