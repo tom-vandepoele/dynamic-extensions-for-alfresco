@@ -12,8 +12,17 @@ services:
 
 script:
 - ./gradlew test
-- if [ "$TRAVIS_PULL_REQUEST" = "true" ]; then ./gradlew integrationTest; fi
-- if [ "$TRAVIS_BRANCH" = "master" ]; then ./gradlew integrationTest; fi
+- |
+  if [[ "$TRAVIS_PULL_REQUEST" == "true" || "$TRAVIS_BRANCH" == "master" ]]; then
+    ./gradlew integrationTest;
+  fi
+- |
+  if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then
+    export SONAR_BRANCH="$TRAVIS_BRANCH";
+  else
+    export SONAR_BRANCH="$TRAVIS_PULL_REQUEST_BRANCH";
+  fi;
+  ./gradlew sonarqube -Dsonar.organization=xenit-eu -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -Dsonar.branch.name=$SONAR_BRANCH -x check
 
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

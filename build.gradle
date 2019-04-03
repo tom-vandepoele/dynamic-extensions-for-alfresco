@@ -8,6 +8,7 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.8.0"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7"
     }
 }
 
@@ -22,6 +23,15 @@ nexusStaging {
     username = project.hasProperty('de_publish_username') ? project.de_publish_username : ''
     password = project.hasProperty('de_publish_password') ? project.de_publish_password : ''
     packageGroup = "eu.xenit"
+}
+
+apply plugin: "org.sonarqube"
+
+sonarqube {
+    properties {
+        property "sonar.projectName", project.name
+        property "sonar.projectKey", project.name
+    }
 }
 
 allprojects {
